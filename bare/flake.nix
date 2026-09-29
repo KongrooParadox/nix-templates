@@ -1,0 +1,27 @@
+{
+  description = "Bare nix flake with empty devShell";
+
+  inputs = {
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  };
+
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+      perSystem =
+        { pkgs, ... }:
+        {
+          devShells.default = pkgs.mkShellNoCC {
+            packages = [ ];
+            shellHook = ''
+              echo "Welcome to your bare Nix shell !"
+            '';
+          };
+        };
+    };
+}

@@ -15,6 +15,11 @@
     in
     {
       templates = {
+        bare = {
+          description = "Bare nix flake with empty devShell";
+          path = ./bare;
+          welcomeText = mkWelcomeText;
+        };
         cpp = {
           description = "C++ flake using CMake, Ninja and clang";
           path = ./cpp;
@@ -25,7 +30,7 @@
           path = ./python;
           welcomeText = mkWelcomeText;
         };
-        default = self.templates.cpp;
+        default = self.templates.bare;
       };
     };
 
